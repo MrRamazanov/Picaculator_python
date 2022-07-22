@@ -1,0 +1,35 @@
+#Perim = perimeter of the polygon
+#Dia = diameter of circle (or) polygon
+#Polysides = number of sides of polygon
+#SideLen = side lenght 1 for beginning equilateral triangle
+#radius_a = radius to slice  radius_a = sqrt((1*2) - (sideLen / 2)*2) 
+#radius_b = 1 - radius_a
+#sideLenNew = sqrt((radius_b*2) + (sidelen2 / 2)*2)
+
+
+from decimal import Decimal
+
+
+pi = 0 
+PolySides = 6     #start with hexagon ->   Isosceles(equilateral) triangles(all sides equal)
+
+SideLen = 1      #All sides in equilateral triangle = 1 also = radius
+
+Perim = 6   #Initial perimeter of hexagon
+
+Dia = 2   #Diameter is 2
+
+while PolySides < 1000000000000000000000000000000:        #30 * 0 Loop
+    SideLen2 = Decimal(SideLen) / Decimal(2)    #half of sideLen
+    radius_a = Decimal(((1**2) - (SideLen / 2)**2)).sqrt()    #lenght of radius_a
+    radius_b = Decimal(1) - Decimal(radius_a)    #lenght of radius_b
+    SideLenNew = Decimal((radius_b**2) + (SideLen2**2)).sqrt()   #lenght of the "new" side
+
+    PolyCircum = Decimal(PolySides * SideLen)  #Number of polygon sides times each side lenght
+
+    pi = PolyCircum / Dia   #Current approximation of pi
+
+    print("Polygon sides:",PolySides,"Pi=",format(pi,"0.5"))
+
+    SideLen = SideLenNew  #Keep the "new" side lenght for the next round 
+    PolySides = PolySides*2  #Double the number of polygon sides from last
